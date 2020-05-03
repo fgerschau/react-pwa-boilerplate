@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "./dist",
+    "rootDir": ".",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "module": "esnext",
+    "lib": ["es6", "dom", "es2017", "esnext.intl", "es2017.intl", "es2018.intl"],
+    "target": "ES6",
+    "jsx": "react",
+    "esModuleInterop": true,
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "exclude": [
+    "./dist",
+    "./node_modules"
+  ],
+  "references": [
+    { "path": "./service-worker" },
+    { "path": "./src" }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "lib": ["es6", "dom", "es2017", "esnext.intl", "es2017.intl", "es2018.intl"]
+  },
+  "include": [
+    "./**/*"
+  ],
+  "exclude": ["../service-worker/**/*"]
+}
