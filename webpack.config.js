@@ -32,7 +32,7 @@ module.exports = (env, argv) => {
         {
           test: /\.tsx?$/,
           enforce: 'pre',
-          include: [path.resolve(__dirname, '../src'), path.resolve(__dirname, '../src')],
+          include: [path.resolve(__dirname, './src'), path.resolve(__dirname, './service-worker')],
           use: [
             { loader: 'eslint-loader', options: { emitErrors: true } },
           ],

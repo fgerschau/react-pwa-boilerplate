@@ -1,5 +1,5 @@
-import { createHandlerBoundToURL, precacheAndRoute } from "workbox-precaching";
-import { registerRoute, NavigationRoute } from "workbox-routing";
+import { createHandlerBoundToURL, precacheAndRoute } from 'workbox-precaching';
+import { registerRoute, NavigationRoute } from 'workbox-routing';
 import { skipWaiting, clientsClaim } from "workbox-core";
 
 declare const self: Window & ServiceWorkerGlobalScope;
@@ -15,9 +15,9 @@ broadcast.onmessage = (event) => {
   }
 };
 
-self.addEventListener("message", (event: MessageEvent) => {
+self.addEventListener('message', (event: MessageEvent) => {
   if (event.data && event.data.type === 'INIT_PORT') {
-    getVersionPort = event.ports[0];
+    [getVersionPort] = event.ports;
   }
 
   if (event.data && event.data.type === 'INCREASE_COUNT_MESSAGE') {
@@ -32,18 +32,18 @@ self.addEventListener("message", (event: MessageEvent) => {
     });
   }
 
-  if (event.data && event.data.type === "SKIP_WAITING") {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
     skipWaiting();
   }
 });
 
 clientsClaim();
 
-const precacheManifest = [].concat((self as any).__WB_MANIFEST || []);
+const precacheManifest = [].concat(self as any).__WB_MANIFEST || []);
 precacheAndRoute(precacheManifest);
 
-const handler = createHandlerBoundToURL("/index.html");
+const handler = createHandlerBoundToURL('/index.html');
 const navigationRoute = new NavigationRoute(handler, {
-  denylist: [/^\/_/, /\/[^/?]+\.[^/]+$/]
+  denylist: [/^\/_/, /\/[^/?]+\.[^/]+$/],
 });
 registerRoute(navigationRoute);
