@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from "react";
-import "./styles.css";
+import React, { useState, useEffect } from 'react';
+import './styles.css';
 
 const App = () => {
   const [count, setCount] = useState();
@@ -24,7 +24,7 @@ const App = () => {
       };
     });
 
-    //Broadcast API
+    // Broadcast API
     broadcast.onmessage = (event) => {
       setCount(event.data.payload);
     };
@@ -57,10 +57,13 @@ const App = () => {
 
   return (
     <div className="App">
-      <button onClick={handleMessageClick}>Send MessageChannel message to service worker</button>
-      <button onClick={handleBroadcastClick}>Send Broadcast API message to service worker</button>
-      <button onClick={handleClientsClick}>Send Clients message to service worker</button>
-      <h2>Counter: {count}</h2>
+      <button type="button" onClick={handleMessageClick}>Send MessageChannel message to service worker</button>
+      <button type="button" onClick={handleBroadcastClick}>Send Broadcast API message to service worker</button>
+      <button type="button" onClick={handleClientsClick}>Send Clients message to service worker</button>
+      <h2>
+        Counter:
+        {count}
+      </h2>
     </div>
   );
 };
