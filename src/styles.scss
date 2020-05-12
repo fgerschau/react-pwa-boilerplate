@@ -1,0 +1,38 @@
+body {
+ font-family: -apple-system, 'Roboto', Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+.root {
+  display: flex;
+  margin: 0;
+}
+
+.app {
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+
+  .wrapper {
+    display: flex;
+    justify-items: space-between;
+    flex-wrap: wrap;
+    white-space: normal;
+
+    button {
+      flex: 1 0 25%;
+      margin: 15px;
+    }
+  }
+
+  .counter {
+    flex: 1 0 100%;
+    margin: auto;
+  }
+
+  footer {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+  }
+}
