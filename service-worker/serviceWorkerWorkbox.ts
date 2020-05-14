@@ -1,6 +1,7 @@
+// / <reference lib="webworker" />
 import { createHandlerBoundToURL, precacheAndRoute } from 'workbox-precaching';
 import { registerRoute, NavigationRoute } from 'workbox-routing';
-import { skipWaiting, clientsClaim } from "workbox-core";
+import { skipWaiting, clientsClaim } from 'workbox-core';
 
 declare const self: Window & ServiceWorkerGlobalScope;
 
@@ -39,7 +40,7 @@ self.addEventListener('message', (event: MessageEvent) => {
 
 clientsClaim();
 
-const precacheManifest = [].concat(self as any).__WB_MANIFEST || []);
+const precacheManifest = [].concat(self.__WB_MANIFEST || []);
 precacheAndRoute(precacheManifest);
 
 const handler = createHandlerBoundToURL('/index.html');
