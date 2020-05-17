@@ -1,8 +1,9 @@
 const webpack = require('webpack');
 const { InjectManifest } = require("workbox-webpack-plugin");
 const path = require("path");
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = (env, argv) => {
   const isProduction = argv.mode === 'production';
@@ -94,6 +95,13 @@ module.exports = (env, argv) => {
           },
         ),
       ),
+
+      new CopyWebpackPlugin({
+        patterns: [
+          { from: path.resolve(__dirname, './public') },
+        ],
+      }),
+
       new webpack.HotModuleReplacementPlugin(),
       ...(isProduction ? [
         new InjectManifest({
