@@ -22,45 +22,49 @@ const App = () => {
   const [count, setCount] = useState();
   let messageChannel: MessageChannel;
 
-  const broadcast = new BroadcastChannel('count-channel');
-  useEffect(() => {
-    navigator.serviceWorker.onmessage = (event) => {
-      if (event.data && event.data.type === 'REPLY_COUNT_CLIENTS') {
-        setCount(event.data.count);
-      }
-    };
 
-    navigator.serviceWorker.ready.then((registration) => {
+  let handleBroadcastClick: (e: React.MouseEvent) => void = () => undefined;
+  if ('BroadcastChannel' in navigator) {
+    const broadcast = new BroadcastChannel('count-channel');
+    useEffect(() => {
+      navigator.serviceWorker.onmessage = (event) => {
+        if (event.data && event.data.type === 'REPLY_COUNT_CLIENTS') {
+          setCount(event.data.count);
+        }
+      };
+
+      navigator.serviceWorker.ready.then((registration) => {
       // MessageChannel
-      messageChannel = new MessageChannel();
-      registration.active.postMessage({
-        type: 'INIT_PORT',
-      }, [messageChannel.port2]);
-      messageChannel.port1.onmessage = (event: MessageEvent) => {
+        messageChannel = new MessageChannel();
+        registration.active.postMessage({
+          type: 'INIT_PORT',
+        }, [messageChannel.port2]);
+        messageChannel.port1.onmessage = (event: MessageEvent) => {
+          setCount(event.data.payload);
+        };
+      });
+
+      // Broadcast API
+      broadcast.onmessage = (event) => {
         setCount(event.data.payload);
       };
-    });
+    }, []);
 
-    // Broadcast API
-    broadcast.onmessage = (event) => {
-      setCount(event.data.payload);
+    handleBroadcastClick = (e: React.MouseEvent) => {
+      e.preventDefault();
+
+      // Broadcast API
+      broadcast.postMessage({
+        type: 'INCREASE_COUNT_BROADCAST',
+      });
     };
-  }, []);
+  }
 
   const handleMessageClick = (e: React.MouseEvent) => {
     e.preventDefault();
     // Message Channel
     navigator.serviceWorker.controller.postMessage({
       type: 'INCREASE_COUNT_MESSAGE',
-    });
-  };
-
-  const handleBroadcastClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-
-    // Broadcast API
-    broadcast.postMessage({
-      type: 'INCREASE_COUNT_BROADCAST',
     });
   };
 

@@ -9,12 +9,14 @@ let getVersionPort: any;
 let count = 0;
 
 // same channel as in App.tsx
-const broadcast = new BroadcastChannel('count-channel');
-broadcast.onmessage = (event) => {
-  if (event.data && event.data.type === 'INCREASE_COUNT_BROADCAST') {
-    broadcast.postMessage({ payload: ++count });
-  }
-};
+if ('BroadcastChannel' in navigator) {
+  const broadcast = new BroadcastChannel('count-channel');
+  broadcast.onmessage = (event) => {
+    if (event.data && event.data.type === 'INCREASE_COUNT_BROADCAST') {
+      broadcast.postMessage({ payload: ++count });
+    }
+  };
+}
 
 self.addEventListener('message', (event: MessageEvent) => {
   if (event.data && event.data.type === 'INIT_PORT') {
