@@ -115,7 +115,7 @@ module.exports = (env, argv) => {
       ]),
     ],
     devServer: {
-      contentBase: [path.join(__dirname, './public')],
+      contentBase: [path.join(__dirname, './dist')],
       port: 5000,
       open: true,
       inline: true,
