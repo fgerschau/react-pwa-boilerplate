@@ -33,7 +33,6 @@ function registerValidSW(swUrl: string, config?: Config) {
           return;
         }
 
-
         installingWorker.onstatechange = () => {
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {

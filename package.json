@@ -45,7 +45,9 @@
   },
   "scripts": {
     "start": "webpack-dev-server --config ./webpack.config.js",
-    "build": "npx webpack --config ./webpack.config.js --progress --mode production"
+    "build": "npx webpack --config ./webpack.config.js --progress --mode production",
+    "lint": "npx eslint",
+    "lint:fix": "npx eslint src --fix"
   },
   "browserslist": [
     ">0.2%",

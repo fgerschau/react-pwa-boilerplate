@@ -22,7 +22,6 @@ const App = () => {
   const [count, setCount] = useState();
   let messageChannel: MessageChannel;
 
-
   let handleBroadcastClick: (e: React.MouseEvent) => void = () => undefined;
   if ('BroadcastChannel' in navigator) {
     const broadcast = new BroadcastChannel('count-channel');
