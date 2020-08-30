@@ -86,15 +86,10 @@ module.exports = (env, argv) => {
       publicPath: '/',
     },
     plugins: [
-      new HtmlWebpackPlugin(
-        Object.assign(
-          {},
-          {
-            inject: true,
-            template: 'public/index.html',
-          },
-        ),
-      ),
+      new HtmlWebpackPlugin({
+        filename: 'index.html',
+        template: './index.html',
+      }),
 
       new CopyWebpackPlugin({
         patterns: [
@@ -115,7 +110,6 @@ module.exports = (env, argv) => {
       ]),
     ],
     devServer: {
-      contentBase: [path.join(__dirname, './dist')],
       port: 5000,
       open: true,
       inline: true,
